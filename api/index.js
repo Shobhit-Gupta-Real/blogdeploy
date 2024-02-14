@@ -82,7 +82,6 @@ app.put('/post', blogUpload.single('file'), async(req,res)=>{
     let image = null
     if(req.file){
     const uploading = req.file
-    console.log(uploading)
     image = {url: uploading.path, filename: uploading.filename}
     }
     const {token} = req.cookies
@@ -105,7 +104,6 @@ app.put('/post', blogUpload.single('file'), async(req,res)=>{
 })
 app.post('/post', blogUpload.single('file'), async (req,res)=>{
     const uploading = req.file
-    console.log(uploading)
     const image = {url: uploading.path, filename: uploading.filename}
     const {token} = req.cookies
     jwt.verify(token, secret, {}, async(err, info)=>{ //it will verfy our token
