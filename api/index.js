@@ -78,12 +78,12 @@ app.get('/post', async(req,res)=>{
     // here we have given username in the array becauser we want only username from the userinfo and not anything else
     res.json(Posts)
 })
-app.put('/postedit', async(req,res)=>{
+app.put('/postedit', blogUpload.single('file'), async(req,res)=>{
     let image = null
-    // if(req.file){
-    // const uploading = req.file
-    // image = {url: uploading.path, filename: uploading.filename}
-    // }
+    if(req.file){
+    const uploading = req.file
+    image = {url: uploading.path, filename: uploading.filename}
+    }
     const {token} = req.cookies
     jwt.verify(token, secret, {}, async(err, info)=>{ //it will verfy our token
         if(err) throw err
