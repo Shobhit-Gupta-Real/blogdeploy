@@ -17,7 +17,7 @@ const {blogImg} = require('./cloudinary/post')
 const blogUpload = multer({storage: blogImg})
 
 app.use('/uploads',express.static(__dirname+'/uploads'))
-app.use(cors({credentials:true, origin:['https://blogdeploy-frontend.vercel.app/'], methods: ["POST", "GET"]})) //for allowing the credentials originated from the react localhost
+app.use(cors({credentials:true, origin:['https://blogdeploy-frontend.vercel.app'], methods: ["POST", "GET"]})) //for allowing the credentials originated from the react localhost
 app.use(express.json()) //express json parser to convert data from json to object
 app.use(cookieParser())
 
