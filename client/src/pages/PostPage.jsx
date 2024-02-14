@@ -10,7 +10,7 @@ function PostPage() {
     const {userInfo} = useContext(UserContext)
     const {id} = useParams();
     useEffect(()=>{
-        fetch(`http://localhost:4000/post/${id}`)
+        fetch(`https://blogdeploy-vghx.vercel.app/post/${id}`)
         .then(response =>{
             response.json().then(postInfo =>{
                 setPostInfo(postInfo)
@@ -19,7 +19,7 @@ function PostPage() {
     },[])
     
     async function DeletePost(){
-      const response = await fetch(`http://localhost:4000/delete/${id}`,{
+      const response = await fetch(`https://blogdeploy-vghx.vercel.app/delete/${id}`,{
         method:'POST',
       })
       if(response.ok){

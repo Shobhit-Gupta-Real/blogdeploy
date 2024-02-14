@@ -6,7 +6,7 @@ import { UserContext } from '../context/UserConstext'
 function Nav() {
   const {setUserInfo, userInfo} = useContext(UserContext)
   useEffect(()=>{
-    fetch('http://localhost:4000/profile',{
+    fetch('https://blogdeploy-vghx.vercel.app/profile',{
       credentials: 'include',
     }).then(response=>{
       response.json().then(userInfo=>{
@@ -16,7 +16,7 @@ function Nav() {
   },[])
 
   async function logout(){
-    const gone = await fetch('http://localhost:4000/logout',{
+    const gone = await fetch('https://blogdeploy-vghx.vercel.app/logout',{
       credentials: 'include',
       method: 'POST',
     })

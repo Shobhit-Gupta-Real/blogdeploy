@@ -13,7 +13,7 @@ function Register() {
     the promise will fail as no responce will be there.
     There we need to work with both backend and frontend simultanousely*/
 
-    const response = await fetch('http://localhost:4000/signup',{
+    const response = await fetch('https://blogdeploy-vghx.vercel.app/signup',{
       method: 'POST',
       body: JSON.stringify({username, password}),
       headers: {'Content-Type':'application/json'},
