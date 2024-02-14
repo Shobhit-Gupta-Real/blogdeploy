@@ -78,7 +78,7 @@ app.get('/post', async(req,res)=>{
     // here we have given username in the array becauser we want only username from the userinfo and not anything else
     res.json(Posts)
 })
-app.put('/post', blogUpload.single('file'), async(req,res)=>{
+app.put('/postedit', blogUpload.single('file'), async(req,res)=>{
     let image = null
     if(req.file){
     const uploading = req.file
@@ -102,7 +102,7 @@ app.put('/post', blogUpload.single('file'), async(req,res)=>{
     res.json(postDoc)
     })
 })
-app.post('/post', blogUpload.single('file'), async (req,res)=>{
+app.post('/posting', blogUpload.single('file'), async (req,res)=>{
     const uploading = req.file
     const image = {url: uploading.path, filename: uploading.filename}
     const {token} = req.cookies
