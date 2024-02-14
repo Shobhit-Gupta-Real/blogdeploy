@@ -42,7 +42,10 @@ function CreatePost() {
             credentials:'include',
         })
         if(response.ok){
-            setRedirect(true)
+          setRedirect(true)
+        }
+        else{
+          alert('Post Not Created!')
         }
     }
 
