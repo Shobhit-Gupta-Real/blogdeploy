@@ -102,7 +102,8 @@ app.put('/postedit', blogUpload.single('file'), async(req,res)=>{
     res.json(postDoc)
     // })
 })
-app.post('/posting', blogUpload.single('file'), async (req,res)=>{
+app.post('/posting', async(req,res)=>{
+    blogUpload.single('file')
     const uploading = req.file
     const image = {url: uploading.path, filename: uploading.filename}
     // const {token} = req.cookies
