@@ -29,16 +29,14 @@ function CreatePost() {
     const [redirect, setRedirect] = useState(false)
 
    async function createNewPost(ev){
-        const data = new FormData();
-        data.set('title', title);
-        data.set('summary', summary);
-        data.set('content', value);
-        data.set('file', files[0])
+        const data = {
+          title, summary, content: value, file: files[0]
+        }
         ev.preventDefault()
         
         const response = await fetch('https://blogdeploy-vghx.vercel.app/posting',{
             method: 'POST',
-            body: data,
+            body: JSON.stringify(data),
             credentials:'include',
         })
         if(response.ok){
