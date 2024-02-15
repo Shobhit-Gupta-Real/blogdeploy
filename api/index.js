@@ -134,3 +134,7 @@ app.get('/post/:id', async(req,res)=>{
     const postDoc = await PostModel.findById(id).populate('author', ['username'])
     res.json(postDoc)
 })
+
+app.listen(4000, ()=>{
+    console.log(`server 4000 is ready!`)
+})
