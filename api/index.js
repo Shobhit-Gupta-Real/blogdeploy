@@ -84,9 +84,9 @@ app.put('/postedit', blogUpload.single('file'), async(req,res)=>{
     const uploading = req.file
     image = {url: uploading.path, filename: uploading.filename}
     }
-    // const {token} = req.cookies
-    // jwt.verify(token, secret, {}, async(err, info)=>{ //it will verfy our token
-    //     if(err) throw err
+    const {token} = req.cookies
+    jwt.verify(token, secret, {}, async(err, info)=>{ //it will verfy our token
+        if(err) throw err
     const {id, title, summary, content} = req.body
     const postDoc = await PostModel.findById(id)
     const iSAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id)
@@ -100,9 +100,9 @@ app.put('/postedit', blogUpload.single('file'), async(req,res)=>{
     await postDoc.updateOne({title, summary, content,
     cover:image?image:postDoc.cover})
     res.json(postDoc)
-    // })
+    })
 })
-app.post('/posting', blogUpload.single('file'), async(req,res)=>{
+app.post('/posting', blogUpload.single('file'), async (req,res)=>{
     const uploading = req.file
     const image = {url: uploading.path, filename: uploading.filename}
     // const {token} = req.cookies

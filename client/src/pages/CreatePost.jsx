@@ -37,6 +37,9 @@ function CreatePost() {
         const response = await fetch('https://blogdeploy-vghx.vercel.app/posting',{
             method: 'POST',
             body: JSON.stringify(data),
+            headers: {
+              'Content-Type': 'application/json',
+            },
             credentials:'include',
         })
         if(response.ok){
