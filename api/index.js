@@ -102,8 +102,7 @@ app.put('/postedit', blogUpload.single('file'), async(req,res)=>{
     res.json(postDoc)
     // })
 })
-app.post('/posting', async(req,res)=>{
-    blogUpload.single('file')
+app.post('/posting', blogUpload.single('file'), async(req,res)=>{
     const uploading = req.file
     const image = {url: uploading.path, filename: uploading.filename}
     // const {token} = req.cookies
@@ -118,8 +117,7 @@ app.post('/posting', async(req,res)=>{
     author:info.id,
    })
    res.json({postDoc})
-    // }
-    // )
+    // })
    
 })
 app.post('/delete/:id', async(req,res)=>{
@@ -135,8 +133,4 @@ app.get('/post/:id', async(req,res)=>{
     const {id} = req.params
     const postDoc = await PostModel.findById(id).populate('author', ['username'])
     res.json(postDoc)
-})
-
-app.listen(4000, ()=>{
-    console.log(`server 4000 is ready!`)
 })
