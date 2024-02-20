@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Navigate } from 'react-router-dom';
+import { BACKEND_URL } from './exports';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -13,7 +14,7 @@ function Register() {
     the promise will fail as no responce will be there.
     There we need to work with both backend and frontend simultanousely*/
 
-    const response = await fetch('https://blogdeploy-vghx.vercel.app/signup',{
+    const response = await fetch(`${BACKEND_URL}/signup`,{
       method: 'POST',
       body: JSON.stringify({username, password}),
       headers: {'Content-Type':'application/json'},

@@ -51,9 +51,14 @@ app.post('/login', async(req,res)=>{
     const passOk = bcrypt.compareSync(password, userDoc.password)
     console.log(userDoc, passOk);
     if(passOk){
-        jwt.sign({username, id:userDoc._id}, //payload
-            secret,//secret key
-            {},//here you can set the properties like expiration time of the token and algorithm etc.
+        jwt.sign(
+            {username, id:userDoc._id}, //payload
+            secret, //secret key
+            {
+                httpOnly: true, // Cookie cannot be accessed via client-side JavaScript
+                secure: true, // Cookie sent over HTTPS only
+                sameSite: 'None' // Allow cross-site cookies
+            },      //here you can set the properties like expiration time of the token and algorithm etc.
             (err, token)=>{ //call back function after the token is generated
             if(err) throw err;
             res.cookie('token', token).json({

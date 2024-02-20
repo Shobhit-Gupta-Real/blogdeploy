@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import {Navigate} from 'react-router-dom'
 import { UserContext } from '../context/UserConstext'
+import { BACKEND_URL } from './exports'
 
 function Login() {
   const [username, setUsername] = useState('')
@@ -9,7 +10,7 @@ function Login() {
   const {userInfo, setUserInfo} = useContext(UserContext)
   async function Logging(ev){
     ev.preventDefault()
-    const response = await fetch('https://blogdeploy-vghx.vercel.app/login', {
+    const response = await fetch(`${BACKEND_URL}/login`, {
       method:'POST',
       body: JSON.stringify({username, password}),
       headers: {'Content-Type':'application/json'},

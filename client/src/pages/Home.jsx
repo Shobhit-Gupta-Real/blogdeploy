@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Post from '../seed/Post'
+import { BACKEND_URL } from './exports'
 
 
 
@@ -7,7 +8,7 @@ function Home() {
   const [posts, setPosts] = useState([])
 
   useEffect(()=>{
-    fetch('https://blogdeploy-vghx.vercel.app/post').then(response =>{
+    fetch(`${BACKEND_URL}/post`).then(response =>{
       response.json().then(posts =>{
         setPosts(posts)
       })

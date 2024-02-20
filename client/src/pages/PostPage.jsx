@@ -2,6 +2,7 @@ import { formatISO9075 } from 'date-fns';
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import {UserContext} from '../context/UserConstext'
+import { BACKEND_URL } from './exports';
 
 function PostPage() {
     const [postInfo, setPostInfo] = useState(null)
@@ -10,7 +11,7 @@ function PostPage() {
     const {userInfo} = useContext(UserContext)
     const {id} = useParams();
     useEffect(()=>{
-        fetch(`https://blogdeploy-vghx.vercel.app/post/${id}`)
+        fetch(`${BACKEND_URL}/post/${id}`)
         .then(response =>{
             response.json().then(postInfo =>{
                 setPostInfo(postInfo)
@@ -19,7 +20,7 @@ function PostPage() {
     },[])
     
     async function DeletePost(){
-      const response = await fetch(`https://blogdeploy-vghx.vercel.app/delete/${id}`,{
+      const response = await fetch(`${BACKEND_URL}/delete/${id}`,{
         method:'POST',
       })
       if(response.ok){

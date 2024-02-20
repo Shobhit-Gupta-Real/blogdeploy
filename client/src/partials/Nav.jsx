@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import ThemeBtn from '../components/ThemeBtn'
 import { UserContext } from '../context/UserConstext'
+import { BACKEND_URL } from '../pages/exports';
+
 
 function Nav() {
   const {setUserInfo, userInfo} = useContext(UserContext)
   useEffect(()=>{
-    fetch('https://blogdeploy-vghx.vercel.app/profile',{
+    fetch(`${BACKEND_URL}/profile`,{
       credentials: 'include',
     }).then(response=>{
       response.json().then(userInfo=>{
@@ -16,7 +18,7 @@ function Nav() {
   },[])
 
   async function logout(){
-    const gone = await fetch('https://blogdeploy-vghx.vercel.app/logout',{
+    const gone = await fetch(`${BACKEND_URL}/logout`,{
       credentials: 'include',
       method: 'POST',
     })

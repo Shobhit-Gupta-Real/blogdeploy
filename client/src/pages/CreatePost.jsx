@@ -3,6 +3,7 @@ import "./CreatePost.css"
 import { Navigate } from 'react-router-dom'
 import ReactQuill from "react-quill" //code editor api 
 import 'react-quill/dist/quill.snow.css'; //for the style of the code editor 
+import { BACKEND_URL } from './exports';
 
 
 function CreatePost() {
@@ -37,7 +38,7 @@ function CreatePost() {
         data.set('content', value)
         ev.preventDefault()
         
-        const response = await fetch('https://blogdeploy-vghx.vercel.app/posting',{
+        const response = await fetch(`${BACKEND_URL}/posting`, {
             method: 'POST',
             body: data,
             credentials:'include',
@@ -67,7 +68,7 @@ if(redirect){
         value={summary} 
         onChange={(e)=>setSummary(e.target.value)}/>
 
-            <input type="file"
+            <input type="file" accept='image/*'
              onChange={ev => setFiles(ev.target.files)} className='file_input dark:text-white'/>
         <div className='editor'>
             <ReactQuill
