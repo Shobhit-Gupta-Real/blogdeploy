@@ -17,7 +17,15 @@ const {blogImg} = require('./cloudinary/post')
 const blogUpload = multer({storage: blogImg})
 
 app.use('/uploads',express.static(__dirname+'/uploads'))
-app.use(cors({credentials:true, origin:[process.env.FRONTEND_URL], methods: ["POST", "GET", "PUT"]})) //for allowing the credentials originated from the react localhost
+
+const corsOptions = {
+    credentials:true, 
+    origin: [process.env.FRONTEND_URL], 
+    methods: ["POST", "GET", "PUT"]
+}
+
+app.use(cors(corsOptions)); //for allowing the credentials originated from the react localhost
+// {credentials:true, origin:[process.env.FRONTEND_URL], methods: ["POST", "GET", "PUT"]})
 app.use(express.json()) //express json parser to convert data from json to object
 app.use(cookieParser())
 
@@ -41,6 +49,7 @@ app.post('/login', async(req,res)=>{
     const {username, password} = req.body
     const userDoc = await Usermodel.findOne({username})
     const passOk = bcrypt.compareSync(password, userDoc.password)
+    console.log(userDoc, passOk);
     if(passOk){
         jwt.sign({username, id:userDoc._id}, //payload
             secret,//secret key
