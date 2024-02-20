@@ -55,7 +55,7 @@ app.post('/login', async(req,res)=>{
             {username, id:userDoc._id}, //payload
             secret, //secret key
             {
-                httpOnly: true, // Cookie cannot be accessed via client-side JavaScript
+                // httpOnly: true, // Cookie cannot be accessed via client-side JavaScript
                 secure: true, // Cookie sent over HTTPS only
                 sameSite: 'None' // Allow cross-site cookies
             },      //here you can set the properties like expiration time of the token and algorithm etc.
