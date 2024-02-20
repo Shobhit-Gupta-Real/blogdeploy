@@ -56,7 +56,7 @@ app.post('/login', async(req,res)=>{
             secret, //secret key
             {
                 // httpOnly: true, // Cookie cannot be accessed via client-side JavaScript
-                secure: true, // Cookie sent over HTTPS only
+                // secure: true, // Cookie sent over HTTPS only
                 sameSite: 'None' // Allow cross-site cookies
             },      //here you can set the properties like expiration time of the token and algorithm etc.
             (err, token)=>{ //call back function after the token is generated
