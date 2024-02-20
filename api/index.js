@@ -17,7 +17,7 @@ const {blogImg} = require('./cloudinary/post')
 const blogUpload = multer({storage: blogImg})
 
 app.use('/uploads',express.static(__dirname+'/uploads'))
-app.use(cors({credentials:true, origin:['https://blogdeploy-frontend.vercel.app'], methods: ["POST", "GET", "PUT"]})) //for allowing the credentials originated from the react localhost
+app.use(cors({credentials:true, origin:[process.env.FRONTEND_URL], methods: ["POST", "GET", "PUT"]})) //for allowing the credentials originated from the react localhost
 app.use(express.json()) //express json parser to convert data from json to object
 app.use(cookieParser())
 
@@ -106,6 +106,7 @@ app.post('/posting', blogUpload.single('file'), async (req,res)=>{
     const uploading = req.file
     const image = {url: uploading.path, filename: uploading.filename}
     const {token} = req.cookies
+    console.log('json web token', token);
     jwt.verify(token, secret, {}, async(err, info)=>{ //it will verfy our token
         if(err) throw err
     const {title, summary, content} = req.body
