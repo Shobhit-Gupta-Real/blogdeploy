@@ -54,14 +54,14 @@ app.post('/login', async(req,res)=>{
         jwt.sign(
             {username, id:userDoc._id}, //payload
             secret, //secret key
-            {
-                // httpOnly: true, // Cookie cannot be accessed via client-side JavaScript
-                // secure: true, // Cookie sent over HTTPS only
-                sameSite: 'None' // Allow cross-site cookies
-            },      //here you can set the properties like expiration time of the token and algorithm etc.
+            {},      //here you can set the properties like expiration time of the token and algorithm etc.
             (err, token)=>{ //call back function after the token is generated
             if(err) throw err;
-            res.cookie('token', token).json({
+            res.cookie('token', token, {
+                // httpOnly: true, // Cookie cannot be accessed via client-side JavaScript
+                secure: true, // Cookie sent over HTTPS only
+                sameSite: 'None' // Allow cross-site cookies
+            }).json({
                 id:userDoc._id,
                 username,
             })
@@ -81,7 +81,11 @@ app.get('/profile', (req,res)=>{
 })
 
 app.post('/logout', (req,res)=>{
-    res.cookie('token', '').json('ok')
+    res.cookie('token', '', {
+        // httpOnly: true, // Cookie cannot be accessed via client-side JavaScript
+        secure: true, // Cookie sent over HTTPS only
+        sameSite: 'None' // Allow cross-site cookies
+    }).json('ok')
 })
 
 app.get('/post', async(req,res)=>{
