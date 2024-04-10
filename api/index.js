@@ -58,7 +58,7 @@ app.post('/login', async(req,res)=>{
             (err, token)=>{ //call back function after the token is generated
             if(err) throw err;
             res.cookie('token', token, {
-                // httpOnly: true, // Cookie cannot be accessed via client-side JavaScript
+                httpOnly: true, // Cookie cannot be accessed via client-side JavaScript
                 secure: true, // Cookie sent over HTTPS only
                 sameSite: 'None' // Allow cross-site cookies
             }).json({
